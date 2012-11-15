@@ -1,138 +1,67 @@
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-
-public class RegistrationForm extends JFrame
-{
-	public RegistrationForm()
-	{
-		setTitle("EVIDENCIJA NA VRABOTENI");
-		setSize(320,600);
-		setLocationRelativeTo(null);
+JButton prijava=new JButton("Evidentirajte se");
+		prijava.setBounds(80, 520, 150, 20);
+		pole.add(prijava);
+		prijava.setToolTipText("Generates file");
 		
-		final JPanel pole = new JPanel();
-		getContentPane().add(pole);
-		pole.setLayout(null);
-		
-
-
-JLabel imeLabel = new JLabel("Ime*");
-imeLabel.setBounds(10,15,100,50);
-pole.add(imeLabel);
-
-final JTextField imeTxt = new JTextField();
-imeTxt.setBounds(95,30,150,20);
-pole.add(imeTxt);
-
-JLabel prezimeLabel = new JLabel("Prezime*");
-prezimeLabel.setBounds(10,50,100,50);
-pole.add(prezimeLabel);
-
-final JTextField prezimeTxt = new JTextField();
-prezimeTxt.setBounds(95,65,150,20);
-pole.add(prezimeTxt);
-
-JLabel embgLabel = new JLabel("Matichen broj");
-embgLabel.setBounds(10,85,100,50);
-pole.add(embgLabel);
-
-final JTextField embgTxt = new JTextField();
-embgTxt.setBounds(95,100,150,20);
-pole.add(embgTxt);
-
-final JLabel rabota=new JLabel("Rabotno mesto");
-rabota.setBounds(10,120,100,50);
-pole.add(rabota);
-
-String [] rabotaList={"Direktor","Shef","Rabotnik"};
-final JComboBox combo=new JComboBox(rabotaList);
-combo.setSelectedIndex(2);
-combo.setBounds(105, 135, 150, 20);
-pole.add(combo);
-
-final JLabel sektorNaziv=new JLabel("Sektor vo koj pripagate:");
-sektorNaziv.setBounds(10,160,300,50);
-pole.add(sektorNaziv);
-
-
-final String[] sektor={"Prodazen sektor","Marketing","Proizvodstvo","Sektor za nabavka"};
-final JRadioButton kopce=new JRadioButton(sektor[0]);
-final JRadioButton kopce1=new JRadioButton(sektor[1]);
-final JRadioButton kopce2=new JRadioButton(sektor[2]);
-final JRadioButton kopce3=new JRadioButton(sektor[3]);
-
-kopce.setActionCommand(sektor[0]);
-kopce1.setActionCommand(sektor[1]);
-kopce2.setActionCommand(sektor[2]);
-kopce3.setActionCommand(sektor[3]);
-
-kopce.setSelected(true);
-
-kopce.setBounds(35, 210, 250, 15);
-kopce1.setBounds(35, 240, 250, 15);
-kopce2.setBounds(35, 270, 250, 15);
-kopce3.setBounds(35, 300, 250, 15);
-
-pole.add(kopce);
-pole.add(kopce1);
-pole.add(kopce2);
-pole.add(kopce3);
-
-ButtonGroup grupa=new ButtonGroup();
-grupa.add(kopce);
-grupa.add(kopce1);
-grupa.add(kopce2);
-grupa.add(kopce3);
-
-final JLabel smenaNaziv=new JLabel("Rabotna smena za koja se evidentirate:");
-smenaNaziv.setBounds(10,300,1000,80);
-pole.add(smenaNaziv);
-
-final String[] smena={"Prva smena 08:00h - 14:00h","Vtora smena 10:00h - 16:00h","Treta smena 14:00h - 20:00h"};
-final JRadioButton kopceSmena=new JRadioButton(smena[0]);
-final JRadioButton kopceSmena1=new JRadioButton(smena[1]);
-final JRadioButton kopceSmena2=new JRadioButton(smena[2]);
-
-
-kopceSmena.setActionCommand(smena[0]);
-kopceSmena1.setActionCommand(smena[1]);
-kopceSmena2.setActionCommand(smena[2]);
-
-kopceSmena.setSelected(true);
-
-kopceSmena.setBounds(35, 360, 250, 15);
-kopceSmena1.setBounds(35, 390, 250, 15);
-kopceSmena2.setBounds(35, 420, 250, 15);
-
-pole.add(kopceSmena);
-pole.add(kopceSmena1);
-pole.add(kopceSmena2);
-
-ButtonGroup grupa1=new ButtonGroup();
-grupa1.add(kopceSmena);
-grupa1.add(kopceSmena1);
-grupa1.add(kopceSmena2);
-
-final JLabel brojLabel=new JLabel("Vnesete go Vashiot edinstven evidenten broj:");
-brojLabel.setBounds(10,438,400,50);
-pole.add(brojLabel);
-
-final JTextField brojTxt=new JTextField();
-brojTxt.setBounds(10,483,150,20);
-pole.add(brojTxt);
-
-	}}
-	
+		prijava.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent event)
+			{
+				if(imeTxt.getText().equals("")||prezimeTxt.getText().equals(""))
+				{
+					JOptionPane.showMessageDialog(pole,"Polinjata so * mora da se popolneti!","VNIMANIE", JOptionPane.WARNING_MESSAGE);
+				}
+				else
+				{
+					try
+					{
+						FileWriter record=new FileWriter("D:/Evidencija.txt");
+						BufferedWriter out=new BufferedWriter(record);
+						out.write("******************EVIDENCIJA NA VRABOTENI*******************"+"\r\n");
+						out.write("\r\n");
+						out.write("Ime: "+imeTxt.getText()+"\r\n");
+						out.write("Prezime: "+prezimeTxt.getText()+"\r\n");
+						out.write("Matichen broj: "+embgTxt.getText()+"\r\n");
+						out.write("Rabotno mesto: "+combo.getSelectedItem()+"\r\n");
+						if(kopce.isSelected())
+						{
+							out.write("Sektor: "+sektor[0]+"\r\n");
+						}
+						if(kopce1.isSelected())
+						{
+							out.write("Sektor: "+sektor[1]+"\r\n");
+						}
+						if(kopce2.isSelected())
+						{
+							out.write("Sektor: "+sektor[2]+"\r\n");
+						}
+						if(kopce3.isSelected())
+						{
+							out.write("Sektor: "+sektor[3]+"\r\n");
+						}
+						//smena
+						if(kopceSmena.isSelected())
+						{
+							out.write("Smena: "+smena[0]+"\r\n");
+						}
+						if(kopceSmena1.isSelected())
+						{
+							out.write("Smena: "+smena[1]+"\r\n");
+						}
+						if(kopceSmena2.isSelected())
+						{
+							out.write("Smena: "+smena[2]+"\r\n");
+						}
+						out.write("Evidenten broj: "+brojTxt.getText()+"\r\n");
+												
+						
+						out.write("\r\n");
+						out.write("************************************************************");
+						out.close();
+						JOptionPane.showMessageDialog(pole, "Prijavuvanjeto e uspeshno!");
+					}
+					catch(Exception E)
+					{
+						
+					}
+				}
