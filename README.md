@@ -1,2 +1,2 @@
-Proektot e kreiran vo Java Programski jazik, e koriste Eclipse IDE, a repozitorite e koristen GITHUB
+Proektot e kreiran vo Java Programski jazik, e koristen Eclipse IDE, a za kreiranje na repozitory-to e koristen GITHUB.
 ================
